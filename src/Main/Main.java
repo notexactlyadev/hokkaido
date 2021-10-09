@@ -36,7 +36,7 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		Map<Integer, CameraDemo> camList = new HashMap<>();
+		ArrayList<CameraDemo> camList = new ArrayList<>();
                 
 		boolean shouldExit = false;
 		int opt = 0;
@@ -89,7 +89,7 @@ public class Main {
 
 				// Mostrar Camaras
 				case 2: {
-					camList.forEach( (KK, VV) -> System.out.println("Camara " + KK));
+					camList.forEach( (KK) -> System.out.println("Camara " + KK.getCamera().getcId()));
 					detenerPantalla();
 					limpiarPantalla();
 					break;
@@ -111,13 +111,25 @@ public class Main {
 							break;
 						}
 
-						if(camList.containsKey(ccId)) {
-							camList.get(ccId).getCamera().takePicture(null, null, null, null);
+						boolean found = false;
+						try {
+							for (CameraDemo elem : camList) {
+								if (elem.getCamera().getcId() == ccId) {
+									found = true;
+									elem.getCamera().takePicture(null, null, null, null);
+									break;
+								} else {
+									found = false;
+								}
+							}
+							if (!found) {
+								limpiarPantalla();
+								System.out.println("No se encuentra la camara, intente nuevamente...");
+								detenerPantalla();
+							}
+
+						} catch (Exception ex) {
 							break;
-						} else {
-							limpiarPantalla();
-							System.out.println("No se encuentra la camara, intente nuevamente...");
-							detenerPantalla();
 						}
 					}
 					break;
