@@ -56,7 +56,9 @@ public class Camera {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
-    
+
+    public int getcId() {
+        return cId;
+    }
 }
