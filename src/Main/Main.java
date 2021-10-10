@@ -3,9 +3,8 @@ package Main;
 import android.CameraDemo.CameraDemo;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
 	static Scanner sc = new Scanner(System.in);
@@ -82,14 +81,14 @@ public class Main {
 							break;
 						}
 
-						camList.put(ccId, new CameraDemo(ccId));
+						camList.add(new CameraDemo(ccId));
 					}
 					break;
 				}
 
 				// Mostrar Camaras
 				case 2: {
-					camList.forEach( (KK) -> System.out.println("Camara " + KK.getCamera().getcId()));
+					camList.forEach((KK) -> System.out.println("Camara " + KK.getCamera().getcId()));
 					detenerPantalla();
 					limpiarPantalla();
 					break;
